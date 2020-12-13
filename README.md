@@ -1,3 +1,18 @@
+# Stack
+
+- https://typeorm.io#/
+- Mongoose for MongoDB
+
+- https://nestjs.com
+
+- https://www.netlify.com
+
+- https://jscamp.tech/2019/speakers/adam-argyle/
+- https://js-kongress.com/memories/
+
+- https://www.carbondesignsystem.com/components/modal/usage
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,3 +1,3 @@
 export default function Home() {
-	return (<h>Welcome to Home</h>);
+	return (<h2>Votre journée démarre ici Worker!</h2>);
 }

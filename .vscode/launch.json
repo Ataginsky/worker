@@ -22,7 +22,7 @@
 			"smartStep": true,
 			"showAsyncStacks": true,
 			"skipFiles": ["node_modules"],
-			"sourceMapPathOverrides": { "*": "${workspaceFolder}/src/*" },
+			// "sourceMapPathOverrides": { "*": "${workspaceFolder}/src/*" },
 			// "outFiles": ["${workspaceFolder}/public/**/*.js"]
 		},
 	]

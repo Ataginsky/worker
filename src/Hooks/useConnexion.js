@@ -10,9 +10,9 @@ export default function useConnexion() {
 
 		const intervalId = setInterval(() => {
 
-			if(connectionState !== window.navigator.onLine) {
-				connectionState = window.navigator.onLine;
-				setCon(window.navigator.onLine);
+			if (connectionState !== window.navigator.$$internetAvaible) {
+				connectionState = window.navigator.$$internetAvaible;
+				setCon(window.navigator.$$internetAvaible);
 			}
 
 		}, 1000);

@@ -4,40 +4,61 @@ import {
   Route
 } from "react-router-dom";
 
+import dayjs from 'dayjs';
+import dayjsfr from 'dayjs/locale/fr';
+import dayjsRelativeTime from 'dayjs/plugin/relativeTime';
 
 import InternetConnectionChecker from './InternetConnectionChecker';
 // import InternetWatcher from './Components/InternetWatcher';
 import MaFicheJournaliere from "./Pages/MaFicheJournaliere";
 import MenuItem from "./Components/MenuItem";
 
+dayjs.locale('fr');
+dayjs.extend(dayjsRelativeTime);
 
 InternetConnectionChecker.run();
 
 function App() {
 	
-	var APP_NAME = "Worker";
 	let APP_VERSION = '0.1.0 - build ' + new Date().toUTCString();
 
 	return (
 		<Router>
-			<div className="container mx-auto px-4">
+			<div className="w-full md:container mx-auto">
 				
 				{/* <InternetWatcher /> */}
 				
-				<div className="shadow-md p-4 mb-4 select-none">
-					<span className="my-4 cursor-default select-none">
-						<span className="header-title px-2 bg-yellow-400 underline">{APP_NAME}</span>
-					</span>
+				<div className="flex flex-col md:flex-row md:items-baseline justify-between shadow p-4 pb-1 md:p-4 mb-4 select-none bg-white">
+					<div className="mb-4 md:mb-0 md:mr-2 cursor-default select-none
+												  flex flex-row justify-between">
+						<div>
+							<span className="header-title px-2 bg-yellow-400 rounded">W</span>
+							<span className="header-title px-2 ">Worker</span>
+						</div>
+						
+						<div className="block md:hidden w-7 self-end">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path strokeWidth={5} fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" /></svg>
+						</div>
+					</div>
+					
+					<div>
+						<MenuItem to="/" text="Ma fiche journalière" active={true}/>
+						<MenuItem to="/planning" text="Mon planning"/>
+					</div>
 
-					<MenuItem to="/" text="Ma fiche journalière"/>
-					<MenuItem to="/planning" text="Mon planning"/>
+					<div className="block md:hidden"></div>
+					<div className="hidden md:block w-7 self-end">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path strokeWidth={5} fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" /></svg>
+					</div>
 				</div>
 
-				<Switch>
-					<Route path="/" component={MaFicheJournaliere} />
-				</Switch>
-				
-				<div className="text-xs text-gray-500">Version: {APP_VERSION}</div>
+				<div className="px-4">
+					<Switch>
+						<Route path="/" component={MaFicheJournaliere} />
+					</Switch>
+				</div>
+
+				<div className="text-xs p-4 text-gray-500">Version: {APP_VERSION}</div>
 			</div>
 		</Router>
 	);

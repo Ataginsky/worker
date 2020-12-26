@@ -7,7 +7,9 @@ export default function useMaFicheJournaliere() {
 		prenom: 'John',
 		chef: true,
 		conducteur: false,
-		comment: ''
+		comment: '',
+		matin: {},
+		soir: {},
 	});
 
 
@@ -59,8 +61,43 @@ export default function useMaFicheJournaliere() {
 			newFiche[name] = value;
 			return newFiche; */
 
-			let changed = {};
-			changed[name] = value;
+			//-----------------------------------------------------------
+			// Recursive function for setting deep property on object
+			// This function does not mutate source object
+			//-----------------------------------------------------------
+			function setDeepProp(indexPosition, arrayOfKeys, valueToSet, srcObject, mutatedObject) {
+				const property = arrayOfKeys[indexPosition];
+				
+				//--- End with no action, because of developper error of not properly setted property attribute
+				if(typeof property !== 'string' || !(property.length > 0))
+					return;
+
+				if(srcObject[property] === undefined)
+					srcObject[property] = {};
+
+				mutatedObject[property] = srcObject[property];
+
+				indexPosition++;
+
+				if(indexPosition === arrayOfKeys.length)
+					mutatedObject[property] = valueToSet;
+				else if(indexPosition < arrayOfKeys.length)
+					setDeepProp(indexPosition, arrayOfKeys, valueToSet, srcObject[property], mutatedObject[property]);
+			}
+
+			//-----------------------------------------------------------
+			// This is a wrapper for recursive function setDeepProp
+			//-----------------------------------------------------------
+			function setProp(object, property, value) {
+				let propNames = property.split('.');
+				let changed = {};
+				setDeepProp(0, propNames, value, object, changed);
+				return { ...object, ...changed };
+			}
+
+
+			let changed = setProp(fiche, name, value);
+			
 			return { ...fiche, ...changed };
 		});
 	}

@@ -20,7 +20,7 @@
 	}
 	h6 {
 		@apply text-sm font-bold text-gray-900 tracking-tight;
-  }
+	}
 }
 
 @layer components {
@@ -42,6 +42,14 @@
 	.btn.btn--gray {
 		@apply bg-gray-300 hover:bg-white;
 	}
+
+	.inputClass {
+		@apply rounded-md border border-gray-300 outline-none text-blue-600 bg-white transition-shadow hover:shadow-md focus:shadow-md focus:border-yellow-400;
+	}
+
+	.section {
+		@apply my-2 p-2 px-4 rounded-md bg-gray-50 border-l-3 border-yellow-400;
+	}
 }
 
 body {
@@ -50,6 +58,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-input[type="radio"] {
+
+input[type="radio"],
+input[type="checkbox"] {
 	filter: hue-rotate(170deg);
 }

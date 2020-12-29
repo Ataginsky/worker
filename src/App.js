@@ -24,11 +24,11 @@ function App() {
 
 	return (
 		<Router>
-			<div className="w-full md:container mx-auto">
+			<div className="w-full md:container mx-auto bg-white shadow">
 				
 				{/* <InternetWatcher /> */}
 				
-				<div className="flex flex-col md:flex-row md:items-baseline justify-between shadow p-4 pb-1 md:p-4 mb-4 select-none bg-white">
+				<div className="flex flex-col md:flex-row md:items-baseline justify-between shadow p-4 pb-1 md:p-4 mb-4 select-none bg-gray-50">
 					<div className="mb-4 md:mb-0 md:mr-2 cursor-default select-none
 												  flex flex-row justify-between">
 						<div>

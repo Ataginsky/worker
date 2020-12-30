@@ -24,11 +24,11 @@ function App() {
 
 	return (
 		<Router>
-			<div className="w-full md:container mx-auto bg-white shadow">
+			<div className="w-full md:container mx-auto bg-gray-50 shadow">
 				
 				{/* <InternetWatcher /> */}
 				
-				<div className="flex flex-col md:flex-row md:items-baseline justify-between shadow p-4 pb-1 md:p-4 mb-4 select-none bg-gray-50">
+				<div className="flex flex-col md:flex-row md:items-baseline justify-between shadow p-4 pb-1 md:p-4 mb-4 select-none bg-white">
 					<div className="mb-4 md:mb-0 md:mr-2 cursor-default select-none
 												  flex flex-row justify-between">
 						<div>
@@ -42,8 +42,12 @@ function App() {
 					</div>
 					
 					<div>
-						<MenuItem to="/" text="Ma fiche journalière" active={true}/>
-						<MenuItem to="/planning" text="Mon planning"/>
+						Fiche journalière et planning
+						Gestion planning & équipe
+						Gestion administrative et comptable
+						Gestion entrepôt (stock)
+						<MenuItem to="/" text="Fiche journalière" active={true}/>
+						<MenuItem to="/planning" text="Planning"/>
 					</div>
 
 					<div className="block md:hidden"></div>

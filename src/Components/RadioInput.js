@@ -10,7 +10,7 @@ export default function RadioInput(props) {
  */
 
 	// let bgColor = 'hsl(43 77% 78% / 1)';
-	let className = 'cursor-pointer inline-block m-1 px-3 py-2 rounded border';
+	let className = 'cursor-pointer inline-block m-1 px-3 py-2 rounded border text-sm';
 	className += ' transition-all hover:bg-white hover:shadow';
 	className += props.checked === props.value ? ' bg-white border-yellow-300' : ' bg-gray-100 border-gray-300';
 

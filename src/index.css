@@ -51,27 +51,28 @@
 	}
 
 	body {
-		/* @apply bg-gray-200; */
-		background-color: hsl(220 13% 95% / 1);
+		/* @apply bg-gray-50; */
+		@apply bg-gray-50;
+		/* background-color: hsl(220 13% 95% / 1); */
 	}
 
   h1 {
-		@apply text-3xl font-light text-gray-700 tracking-tight;
+		@apply text-3xl font-bold text-gray-800 tracking-tight;
   }
   h2 {
-		@apply text-2xl font-light text-gray-700 tracking-tight;
+		@apply text-2xl font-bold text-gray-800 tracking-tight;
 	}
 	h3 {
-		@apply text-xl font-normal text-gray-700 tracking-tight;
+		@apply text-xl font-bold text-gray-800 tracking-tight;
 	}
 	h4 {
-		@apply text-lg font-normal text-gray-700 tracking-tight;
+		@apply text-lg font-normal text-gray-800 tracking-tight;
 	}
 	h5 {
-		@apply text-base font-normal text-gray-700 tracking-tight;
+		@apply text-base font-normal text-gray-800 tracking-tight;
 	}
 	h6 {
-		@apply text-sm font-normal text-gray-700 tracking-tight;
+		@apply text-sm font-normal text-gray-800 tracking-tight;
 	}
 }
 

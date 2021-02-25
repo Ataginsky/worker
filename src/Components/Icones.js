@@ -35,8 +35,8 @@ export const iconPinned = (props) => {
 export const iconInProcess = (props) => {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth=".1rem" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth=".1rem" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
 		</svg>
 	)
 }
@@ -44,7 +44,7 @@ export const iconInProcess = (props) => {
 export const iconDone = (props) => {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth=".1rem" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 		</svg>
 	)
 }

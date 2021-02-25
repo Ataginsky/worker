@@ -43,10 +43,10 @@ function App() {
 					</div>
 					
 					<div>
-						Fiche journalière et planning (+ gestion planning pour le boss)
+						{/* Fiche journalière et planning (+ gestion planning pour le boss)
 						Gestion équipes & utilisateurs
 						Gestion entrepôt (stock)
-						Gestion administrative et comptable
+						Gestion administrative et comptable */}
 						<MenuItem to="/" text="Fiche journalière" active={true}/>
 						<MenuItem to="/planning" text="Planning"/>
 					</div>

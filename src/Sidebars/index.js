@@ -1,15 +1,13 @@
-import { iconAllProjects, iconCalculette, iconCalendar, iconCheckList, iconDocumentText, iconDone, iconInProcess, iconPinned, iconSectionStock, iconUserGroup } from "../Components/Icones";
-import SidebarMenuItem from "./SidebarMenuItem";
-
+import React from 'react';
+import { Link, useRouteMatch } from "react-router-dom";
 import cx from "classnames";
-import { useRouteMatch } from "react-router-dom";
+import { iconCalculette, iconCalendar, iconCheckList, iconDocumentText, iconDone, iconDown, iconInProcess, iconRight, iconSectionStock, iconUserGroup } from "../Components/Icones";
 
 
 export const SidebarPlannings = (props) => {
 	const { url } = useRouteMatch();
 
 	return (<>
-		{console.log('Render SidebarPlannings')}
 		<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
 			<h3>Fiche</h3>
 			<button className="rounded-full h-8 w-8 bg-theme-700 text-theme-50 text-xl leading-none outline-none">+</button>
@@ -66,6 +64,26 @@ export const SidebarSettings = (props) => {
 	</>
 )}
 
+
+const SidebarMenuItem = React.memo(function Item(props) {
+	
+	const iconArrow = props.opened ? iconDown() : iconRight();
+	
+	return (
+		<div>
+			<div className="flex flex-row justify-between items-center text-sm tracking-tight mt-5">
+				<div>
+					<div className="inline-block w-5 text-gray-350 mr-3 align-top">{props.icon}</div>
+					<Link to={props.path}>
+						<span className="hover:underline">{props.title}</span>
+					</Link>
+				</div>
+				<div className="w-4 text-gray-800">{iconArrow}</div>
+			</div>
+			{props.children}
+		</div>
+	)
+})
 /* 
 <div className="text-theme-700 mb-6">
 	<div className="text-xs text-gray-400">A afficher sur mobile</div>

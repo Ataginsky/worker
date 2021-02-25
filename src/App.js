@@ -4,18 +4,10 @@ import {
 	HashRouter as Router,
 	Switch,
 	Route,
-	Redirect,
 	Link,
-	useParams,
-	useRouteMatch,
 } from "react-router-dom";
 
 import cx from "classnames";
-
-// import MaFicheJournaliere from "./Pages/MaFicheJournaliere";
-import { iconCalculette, iconCheckList, iconSectionSettings, iconSectionStock } from './Components/Icones';
-import { SidebarAccounting, SidebarPlannings, SidebarSettings, SidebarWarehouses } from './Sidebars';
-
 
 /* Theme colors:
  * orange ~= amber
@@ -24,68 +16,8 @@ import { SidebarAccounting, SidebarPlannings, SidebarSettings, SidebarWarehouses
  * blueGray
  */
 
-
-const menuSections = [
-	{
-		path: '/plannings',
-		menu: {
-			title: 'Fiche journalière & planning',
-			icon: iconCheckList,
-		},
-		sidebar: () => <SidebarPlannings />,
-		page: () => <PagePlannings />,
-		subroutes: [
-			{
-				path: '/teams',
-				page: () => <PageTeams />
-			},
-			{
-				path: '/forms/:id',
-				sidebar: () => <SidebarWarehouses />,
-				page: () => <PageFormsId />
-			},
-			{
-				path: '/forms',
-				page: () => <PageForms />
-			},
-		]
-	},
-	{
-		path: '/warehouses',
-		menu: {
-			title: 'Stock',
-			icon: iconSectionStock,
-		},
-		sidebar: () => <SidebarWarehouses />,
-		page: () => <PageWarehouses />,
-	},
-	{
-		path: '/accounting',
-		menu: {
-			title: 'Comptabilité',
-			icon: iconCalculette,
-		},
-		sidebar: () => <SidebarAccounting />,
-		page: () => <PageAccounting />,
-	},
-	{
-		path: '/settings',
-		menu: {
-			title: 'Paramètres',
-			icon: iconSectionSettings,
-		},
-		sidebar: () => <SidebarSettings />,
-		page: () => <PageSettings />,
-	},
-	{
-		path: '/',
-		page: () => <RedirectToHome path='/plannings' />,
-	},
-	{
-		path: '*',
-		page: () => <NoMatch />,
-	}
-];
+// import MaFicheJournaliere from "./Pages/MaFicheJournaliere";
+import { routes } from './Routes';
 
 
 /*-----------------------------------------------------------------------------------------
@@ -95,14 +27,14 @@ function App() {
 
 	// const APP_VERSION = '0.1.0 - build ' + new Date().toUTCString();
 
-	const showMenusSection = menuSections.filter(page => page.menu)
+	const showMenusSection = routes.filter(page => page.menu)
 		.map(page => 
 			<Route key={page.path} path={page.path} children={({ match }) => (
 				<MenuLink match={match} page={page} />
 			)} />
 		);
 
-	const showSidebar = menuSections.filter(page => page.sidebar)
+	const showSidebar = routes.filter(page => page.sidebar)
 		.map(page => {
 			let sidebars = []
 
@@ -116,7 +48,7 @@ function App() {
 			return sidebars;
 		});
 
-	const showPageContent = menuSections.map(page => {
+	const showPageContent = routes.map(page => {
 		let routes = []
 
 		if(page.subroutes)
@@ -177,102 +109,6 @@ function MenuLink({ match, page }) {
 	)
 }
 
-
-function PagePlannings(props) {
-	return (
-		<>
-			<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
-				<input type="text" className="h-full bg-gray-100 p-2 px-4 text-sm rounded-full" placeholder="Search..." />
-				<span>10 may - 13 may</span>
-			</div>
-
-			<h3>To do</h3>
-		</>
-	)
-}
-
-function PageTeams(props) {
-	return <div>Je suis teams</div>
-}
-
-function PageForms(props) {
-	const { url } = useRouteMatch();
-
-	return <div>
-		Liste de toutes les fiches de l'utilisateur connecté:
-		<ul>
-			<li><Link to={`${url}/123456`}>Fiche une</Link></li>
-			<li><Link to={`${url}/456789`}>Fiche deux</Link></li>
-		</ul>
-	</div>
-}
-
-function PageFormsId(props) {
-	const { id } = useParams();
-
-	return <div>
-		Je suis la fiche avec l'id {id}
-	</div>
-}
-
-function PageWarehouses(props) {
-	return (
-		<>
-			<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
-				<input type="text" className="h-full bg-gray-100 p-2 px-4 text-sm rounded-full" placeholder="Search..." />
-				<span>10 may - 13 may</span>
-			</div>
-
-			<h3>Entrepôts</h3>
-		</>
-	)
-}
-
-function PageAccounting(props) {
-	return (
-		<>
-			<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
-				<input type="text" className="h-full bg-gray-100 p-2 px-4 text-sm rounded-full" placeholder="Search..." />
-				<span>10 may - 13 may</span>
-			</div>
-
-			<h3>Comptabilité</h3>
-		</>
-	)
-}
-
-function PageSettings(props) {
-	return (
-		<>
-			<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
-				<input type="text" className="h-full bg-gray-100 p-2 px-4 text-sm rounded-full" placeholder="Search..." />
-				<span>10 may - 13 may</span>
-			</div>
-
-			<h3>Paramètres</h3>
-		</>
-	)
-}
-
-function RedirectToHome(props) {
-	return (
-		<Redirect to={props.path} />
-		// {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-	)
-}
-
-function NoMatch(props) {
-	return (
-		<>
-			<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
-				<input type="text" className="h-full bg-gray-100 p-2 px-4 text-sm rounded-full" placeholder="Search..." />
-				<span>10 may - 13 may</span>
-			</div>
-
-			<h3>Oups 404! Cette page n'existe pas...</h3>
-		</>
-	)
-}
 
 
 /*---------------------------------------------------------------------------------------

@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import {
-  HashRouter as Router,
-  Switch,
-  Route,
-	useRouteMatch,
+	HashRouter as Router,
+	Switch,
+	Route,
 	Redirect,
-  // useParams
+	Link,
 } from "react-router-dom";
 
 import cx from "classnames";
 
 // import MaFicheJournaliere from "./Pages/MaFicheJournaliere";
-import MainSectionMenu from "./Components/MainSectionMenu";
-import SidebarMenuItem from "./Components/SidebarMenuItem";
-import { iconAllProjects, iconDone, iconInProcess, iconPinned } from './Components/Icones';
+import { iconCalculette, iconCheckList, iconSectionSettings, iconSectionStock } from './Components/Icones';
+import { SidebarAccounting, SidebarPlannings, SidebarSettings, SidebarWarehouses } from './Sidebars';
 
 
 /* Theme colors:
@@ -25,13 +23,43 @@ import { iconAllProjects, iconDone, iconInProcess, iconPinned } from './Componen
  */
 
 
- 
+const menuSections = [
+	{ 
+		title: 'Fiche journalière & planning', 
+		icon: iconCheckList, 
+		goTo: '/plannings',
+		sidebar: () => <SidebarPlannings />,
+		page: () => <PagePlannings />,
+	},
+	{
+		title: 'Stock', 
+		icon: iconSectionStock, 
+		goTo: '/warehouses',
+		sidebar: () => <SidebarWarehouses	/>,
+		page: () => <PageWarehouses />,
+	},
+	{ 
+		title: 'Comptabilité', 
+		icon: iconCalculette, 
+		goTo: '/accounting',
+		sidebar: () => <SidebarAccounting />,
+		page: () => <PageAccounting />,
+	},
+	{ 
+		title: 'Paramètres', 
+		icon: iconSectionSettings, 
+		goTo: '/settings',
+		sidebar: () => <SidebarSettings />,
+		page: () => <PageSettings />,
+	}
+];
+
 
 /*-----------------------------------------------------------------------------------------
  * APPLICATION ENTRY POIN 
  * ---------------------------------------------------------------------------------------*/
 function App() {
-	
+
 	// const APP_VERSION = '0.1.0 - build ' + new Date().toUTCString();
 
 	return (
@@ -39,42 +67,46 @@ function App() {
 			{console.log('App.js got rendered')}
 
 			<div className="h-screen flex flex-row">
-				
-				<MainSectionMenu />
 
 				{/*---------------------------------------------------------------------------------------
-					* MENU 
+					* MENU
+				  *---------------------------------------------------------------------------------------*/}
+				<div className={cx("containersStyle w-20 bg-theme-700 flex-shrink-0 flex flex-col items-center")}>
+					<div className={cx("firstHeaderElementStyle mb-7")}>
+						<div className="m-0 p-2 py-1 rounded bg-white text-theme-700 text-center text-2xl font-black">W</div>
+						{/* <div className="m-0 p-2 py-1 text-white text-center text-3xl font-black">T</div> */}
+					</div>
+					
+					{menuSections.map( page => 
+						<Route key={page.goTo} path={page.goTo} children={ ({ match }) => (
+							<MenuLink match={match} page={page} />
+						)} />
+					)}
+
+				</div>
+
+
+				{/*---------------------------------------------------------------------------------------
+					* SIDEBAR
 				  *---------------------------------------------------------------------------------------*/}
 				<div className={cx("containersStyle w-60 px-7 bg-white flex-shrink-0")}>
-					
-					{/* <div className="text-theme-700 mb-6">
-						<div className="text-xs text-gray-400">A afficher sur mobile</div>
-						<div className="inline-block w-6 mr-2 align-top">{iconMenu}</div>
-						Menu principal
-					</div> */}
-
-					<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
-						<h3>Projects</h3>
-						<button className="rounded-full h-8 w-8 bg-theme-700 text-theme-50 text-xl leading-none outline-none">+</button>
-					</div>
-					<SidebarMenuItem title="All projects" icon={iconAllProjects()} />
-					<SidebarMenuItem title="Pinned" icon={iconPinned()} />
-					<SidebarMenuItem title="In process" icon={iconInProcess()} opened={true}>
-						{/* <SubMenuItem /> */}
-					</SidebarMenuItem>
-					<SidebarMenuItem title="Done" icon={iconDone()} />
+					<Switch>
+						{menuSections.map( page => 
+							<Route key={page.goTo} path={page.goTo} render={page.sidebar} />
+						)}
+					</Switch>
 				</div>
-				
+
 
 				{/*---------------------------------------------------------------------------------------
-					* CONTENT 
+					* CONTENT
 				  *---------------------------------------------------------------------------------------*/}
 				<div className={cx("containersStyle px-7 flex-auto")}>
 					<Switch>
-						<Route path="/plannings" component={PagePlannings} />
-						<Route path="/warehouses" component={PageWarehouses} />
-						<Route path="/accounting" component={PageAccounting} />
-						<Route path="/settings" component={PageSettings} />
+						{menuSections.map( page => 
+							<Route key={page.goTo} path={page.goTo} render={page.page} />
+						)}
+						
 						<Route path="/" exact component={RedirectToHome} />
 						<Route path="*" component={NoMatch} />
 					</Switch>
@@ -84,6 +116,18 @@ function App() {
 			</div>
 		</Router>
 	);
+}
+
+
+function MenuLink({ match, page }) {
+	return (
+		<Link to={page.goTo}>
+			<div title={page.title} 
+				className={cx("hover:text-white mb-6 rounded-xl w-10 h-10 p-2 cursor-pointer", match ? "text-white bg-theme-600" : "text-theme-300")}>
+				{page.icon()}
+			</div>
+		</Link>
+	)
 }
 
 
@@ -141,7 +185,7 @@ function PageSettings(props) {
 
 function RedirectToHome(props) {
 	return (
-		<Redirect to="/tasks" /> 
+		<Redirect to="/tasks" />
 		// {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
 	)
 }

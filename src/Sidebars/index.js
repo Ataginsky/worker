@@ -10,11 +10,14 @@ export const SidebarPlannings = (props) => {
 	return (<>
 		<div className={cx("firstHeaderElementStyle mb-8 justify-between")}>
 			<h3>Fiche</h3>
-			<button className="rounded-full h-8 w-8 bg-theme-700 text-theme-50 text-xl leading-none outline-none">+</button>
+			<Link to={`${url}/new-form`}>
+				<button className="rounded-full h-8 w-8 bg-theme-700 text-theme-50 text-xl leading-none outline-none">+</button>
+			</Link>
 		</div>
 		<SidebarMenuItem path={`${url}`} title="Planning" icon={iconCalendar()} />
 		<SidebarMenuItem path={`${url}/teams`} title="Equipes" icon={iconUserGroup()} />
 		<SidebarMenuItem path={`${url}/forms`} title="Fiches" icon={iconCheckList()} />
+		<SidebarMenuItem path={`${url}/labels`} title="Labels" icon={iconCheckList()} />
 	</>
 )}
 

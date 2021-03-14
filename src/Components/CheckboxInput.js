@@ -10,9 +10,9 @@ export default function CheckboxInput(props) {
  */
 
 	// let bgColor = 'hsl(43 77% 78% / 1)';
-	let className = 'cursor-pointer inline-block m-1 px-3 py-2 rounded border border-yellow-300';
+	let className = 'cursor-pointer inline-block m-1 px-3 py-2 rounded border';
 	className += ' transition-all hover:bg-white hover:shadow';
-	className += props.checked === props.value ? ' bg-white border-yellow-300' : ' bg-gray-100';
+	className += props.checked === props.value ? ' border-t-2 bg-indigo-50 text-indigo-800 border-indigo-400' : ' bg-gray-50 text-gray-700 border-gray-300';
 
 
 	return (

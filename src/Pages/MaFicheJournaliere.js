@@ -116,7 +116,7 @@ function Fiche(props) {
 				<Devider>TRAJET DOMICILE / TRAVAIL</Devider>
 
 				<TrajetDescriptor 
-					title="Le matin, t'es allé où ?" 
+					title="Le matin, de chez toi, t'es allé où ?" 
 					trajet={fiche.matin}
 
 					select={<>
@@ -166,7 +166,7 @@ function Fiche(props) {
 				<Devider>PRESTATIONS</Devider>
 				<div>
 					{fiche.taches.map( (tache, index) => {
-						return <Tache tache={tache} index={index} onChangeCallback={updateFiche}/>
+						return <Tache key={tache.uuid} tache={tache} index={index} onChangeCallback={updateFiche}/>
 					})}
 
 					<div className="my-4">

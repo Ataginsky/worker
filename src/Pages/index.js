@@ -1,6 +1,8 @@
 import { Link, Redirect, useParams, useRouteMatch } from "react-router-dom";
 import cx from "classnames";
 
+export { default  as PageNewForm} from './MaFicheJournaliere';
+//export { PageNewForm };
 
 export function PagePlannings(props) {
 	return (
@@ -29,6 +31,10 @@ export function PageForms(props) {
 			<li><Link to={`${url}/456789`}>Fiche deux</Link></li>
 		</ul>
 	</div>
+}
+
+export function PageLabels(props) {
+	return <div>On définit les éthiquettes ici</div>
 }
 
 export function PageFormsId(props) {

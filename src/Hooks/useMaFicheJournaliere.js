@@ -1,4 +1,3 @@
-import { parse } from "postcss";
 import { useState, useEffect } from "react";
 
 export default function useMaFicheJournaliere() {
@@ -27,6 +26,7 @@ export default function useMaFicheJournaliere() {
 		},
 		taches: [
 			{
+				uuid: '',
 				client_name: '',
 				client_tel: '',
 				client_gsm: '',
@@ -42,7 +42,13 @@ export default function useMaFicheJournaliere() {
 				stop_at: 0,
 				duree: 0,
 
-				comment: ''
+				comment: '',
+
+				label: {
+					uuid: '1',
+					color: 'gray',
+					text: 'A faire'
+				}
 			}
 		],
 		heuresTotal: 0,
@@ -66,6 +72,7 @@ export default function useMaFicheJournaliere() {
 					chef: false,
 					taches: [
 						{
+							uuid: '1',
 							client_name: 'Kremers',
 							client_gsm: '0485877665',
 							
@@ -77,12 +84,19 @@ export default function useMaFicheJournaliere() {
 			
 							description: 'Entretiens techniques speciales',
 							start_at: '07:00',
-							stop_at: '08:00',
+							stop_at: '10:00',
 							duree: 0,
 
-							comment: ''
+							comment: '',
+
+							label: {
+								uuid: '1',
+								color: 'green',
+								text: 'Terminée'
+							}
 						},
 						{
+							uuid: '2',
 							client_name: 'IMG',
 							client_tel: '0871234456',
 							client_gsm: '0485877665',
@@ -94,13 +108,20 @@ export default function useMaFicheJournaliere() {
 							activite_code: 106,
 			
 							description: 'Remplacement des filtres',
-							start_at: '08:10',
-							stop_at: '09:00',
+							start_at: '10:10',
+							stop_at: '12:30',
 							duree: 0,
 
-							comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`
+							comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
+
+							label: {
+								uuid: '2',
+								color: 'red',
+								text: 'Non prestée'
+							}
 						},
 						{
+							uuid: '3',
 							client_name: 'IMG',
 							
 							chantier_name: 'Visé Pléiades - Lot 106',
@@ -110,13 +131,20 @@ export default function useMaFicheJournaliere() {
 							activite_code: 106,
 			
 							description: 'Remplacement des filtres',
-							start_at: '08:10',
-							stop_at: '09:00',
+							start_at: '13:30',
+							stop_at: '17:00',
 							duree: 0,
 
-							comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`
+							comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
+
+							label: {
+								uuid: '3',
+								color: 'orange',
+								text: 'A terminer'
+							}
 						},
 						{
+							uuid: '4',
 							client_name: 'IMG',
 							
 							chantier_name: 'Visé Pléiades - Lot 107',
@@ -126,9 +154,15 @@ export default function useMaFicheJournaliere() {
 							activite_code: 106,
 			
 							description: 'Remplacement des filtres',
-							start_at: '08:10',
-							stop_at: '09:00',
+							start_at: '17:30',
+							stop_at: '18:00',
 							duree: 0,
+
+							label: {
+								uuid: '4',
+								color: 'gray',
+								text: 'A faire'
+							}
 						}
 					],
 				};

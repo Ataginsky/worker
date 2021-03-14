@@ -1,7 +1,7 @@
 export default function CalculHeuresTaches(props) {
 	return (
 		<div>
-			Salut
+			(Calculateur des totaux d'heures prestées et utiles)
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 import { iconCalculette, iconCheckList, iconSectionSettings, iconSectionStock } from './Components/Icones';
 import { SidebarAccounting, SidebarPlannings, SidebarSettings, SidebarWarehouses } from './Sidebars';
-import { NoMatch, PageAccounting, PageForms, PageFormsId, PagePlannings, PageSettings, PageTeams, PageWarehouses, RedirectToHome } from './Pages';
+import { NoMatch, PageAccounting, PageForms, PageFormsId, PageLabels, PageNewForm, PagePlannings, PageSettings, PageTeams, PageWarehouses, RedirectToHome } from './Pages';
 
 
 export const routes = [
@@ -18,6 +18,10 @@ export const routes = [
 				page: () => <PageTeams />
 			},
 			{
+				path: '/new-form',
+				page: () => <PageNewForm />
+			},
+			{
 				path: '/forms/:id',
 				sidebar: () => <SidebarWarehouses />,
 				page: () => <PageFormsId />
@@ -25,6 +29,10 @@ export const routes = [
 			{
 				path: '/forms',
 				page: () => <PageForms />
+			},
+			{
+				path: '/labels',
+				page: () => <PageLabels />
 			},
 		]
 	},

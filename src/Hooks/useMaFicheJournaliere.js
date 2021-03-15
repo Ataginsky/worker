@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { LSKEY_NEWFORM } from "../localstoragekeys";
 
 export default function useMaFicheJournaliere() {
 
 
 	const [fiche, setFiche] = useState({
+		// Ce champ détermine quelle version du schéma (MCD/MRD) des fiches est utilisé
+		version: 1, 
 		date: 0,
 		prenom: 'John',
 		chef: true,
@@ -67,107 +70,113 @@ export default function useMaFicheJournaliere() {
 
 		const id = setTimeout(() => {
 			// console.log('Data fetched from network');
-			setFiche(fiche => {
-				let changed = {
-					chef: false,
-					taches: [
-						{
-							uuid: '1',
-							client_name: 'Kremers',
-							client_gsm: '0485877665',
-							
-							chantier_name: 'Lot 78',
-							chantier_adr: 'rue Pré aux Oies 28, 4480 Visé',
-			
-							activite_name: 'Chauffage',
-							activite_code: 103,
-			
-							description: 'Entretiens techniques speciales',
-							start_at: '07:00',
-							stop_at: '10:00',
-							duree: 0,
+			const ficheCache = localStorage.getItem(LSKEY_NEWFORM);
 
-							comment: '',
-
-							label: {
+			if(ficheCache !== null) {
+				setFiche(JSON.parse(ficheCache));
+			}
+			else
+				setFiche(fiche => {
+					let changed = {
+						chef: false,
+						taches: [
+							{
 								uuid: '1',
-								color: 'green',
-								text: 'Terminée'
-							}
-						},
-						{
-							uuid: '2',
-							client_name: 'IMG',
-							client_tel: '0871234456',
-							client_gsm: '0485877665',
-							
-							chantier_name: 'Visé Pléiades - Lot 78',
-							chantier_adr: 'rue Pré aux Oies 4, 4480 Visé',
-			
-							activite_name: 'Ventilation',
-							activite_code: 106,
-			
-							description: 'Remplacement des filtres',
-							start_at: '10:10',
-							stop_at: '12:30',
-							duree: 0,
+								client_name: 'Kremers',
+								client_gsm: '0485877665',
+								
+								chantier_name: 'Lot 78',
+								chantier_adr: 'rue Pré aux Oies 28, 4480 Visé',
+				
+								activite_name: 'Chauffage',
+								activite_code: 103,
+				
+								description: 'Entretiens techniques speciales',
+								start_at: '07:00',
+								stop_at: '10:00',
+								duree: 0,
 
-							comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
+								comment: '',
 
-							label: {
+								label: {
+									uuid: '1',
+									color: 'green',
+									text: 'Terminée'
+								}
+							},
+							{
 								uuid: '2',
-								color: 'red',
-								text: 'Non prestée'
-							}
-						},
-						{
-							uuid: '3',
-							client_name: 'IMG',
-							
-							chantier_name: 'Visé Pléiades - Lot 106',
-							chantier_adr: 'rue Pré aux Oies 7, 4480 Visé',
-			
-							activite_name: 'Ventilation',
-							activite_code: 106,
-			
-							description: 'Remplacement des filtres',
-							start_at: '13:30',
-							stop_at: '17:00',
-							duree: 0,
+								client_name: 'IMG',
+								client_tel: '0871234456',
+								client_gsm: '0485877665',
+								
+								chantier_name: 'Visé Pléiades - Lot 78',
+								chantier_adr: 'rue Pré aux Oies 4, 4480 Visé',
+				
+								activite_name: 'Ventilation',
+								activite_code: 106,
+				
+								description: 'Remplacement des filtres',
+								start_at: '10:10',
+								stop_at: '12:30',
+								duree: 0,
 
-							comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
+								comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
 
-							label: {
+								label: {
+									uuid: '2',
+									color: 'red',
+									text: 'Non prestée'
+								}
+							},
+							{
 								uuid: '3',
-								color: 'orange',
-								text: 'A terminer'
-							}
-						},
-						{
-							uuid: '4',
-							client_name: 'IMG',
-							
-							chantier_name: 'Visé Pléiades - Lot 107',
-							chantier_adr: 'rue Pré aux Oies 8, 4480 Visé',
-			
-							activite_name: 'Ventilation',
-							activite_code: 106,
-			
-							description: 'Remplacement des filtres',
-							start_at: '17:30',
-							stop_at: '18:00',
-							duree: 0,
+								client_name: 'IMG',
+								
+								chantier_name: 'Visé Pléiades - Lot 106',
+								chantier_adr: 'rue Pré aux Oies 7, 4480 Visé',
+				
+								activite_name: 'Ventilation',
+								activite_code: 106,
+				
+								description: 'Remplacement des filtres',
+								start_at: '13:30',
+								stop_at: '17:00',
+								duree: 0,
 
-							label: {
+								comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
+
+								label: {
+									uuid: '3',
+									color: 'orange',
+									text: 'A terminer'
+								}
+							},
+							{
 								uuid: '4',
-								color: 'gray',
-								text: 'A faire'
+								client_name: 'IMG',
+								
+								chantier_name: 'Visé Pléiades - Lot 107',
+								chantier_adr: 'rue Pré aux Oies 8, 4480 Visé',
+				
+								activite_name: 'Ventilation',
+								activite_code: 106,
+				
+								description: 'Remplacement des filtres',
+								start_at: '17:30',
+								stop_at: '18:00',
+								duree: 0,
+
+								label: {
+									uuid: '4',
+									color: 'gray',
+									text: 'A faire'
+								}
 							}
-						}
-					],
-				};
-				return { ...fiche, ...changed };
-			});
+						],
+					};
+					return { ...fiche, ...changed };
+				});
 		}, 0);
 
 
@@ -249,11 +258,15 @@ export default function useMaFicheJournaliere() {
 				return { ...object, ...changed };
 			}
 
-
-			let changed = setProp(fiche, name, value, itemIndex);
 			
-			return { ...fiche, ...changed };
+			const changed = setProp(fiche, name, value, itemIndex);
+			const newFiche = { ...fiche, ...changed };
+			
+			localStorage.setItem(LSKEY_NEWFORM, JSON.stringify(newFiche));
+			
+			return newFiche;
 		});
+
 	}
 
 

@@ -122,7 +122,8 @@ export default function useMaFicheJournaliere() {
 								duree: 0,
 
 								comment: `Il faut aussi purger l'eau\nLes filtres sont déjà chez le client`,
-
+                //worker_comment: '',
+                
 								label: {
 									uuid: '2',
 									color: 'red',

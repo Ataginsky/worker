@@ -88,6 +88,18 @@ function Comments(props) {
   )
 }
 
+function NewComments(props) {
+  return (
+    <div className="mt-3 text-sm text-gray-600">
+      <div className="inline-block w-4 h-4 top-0.5 mr-3 align-top relative"> {/* { top: '2px' } */}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 6h16M4 12h16m-7 6h7" /></svg>
+      </div>
+      <div className="inline-block">
+        <textarea className="inputClass text-sm text-gray-600 border px-2 py-1" cols="40" rows="4" placeholder="Commentaire" />
+      </div>
+    </div>
+  )
+}
 
 const labelModalClassName = "absolute top-0 z-10 shadow-2xl p-2 rounded bg-white border border-gray-300";
 
@@ -141,15 +153,22 @@ export default function Tache(props) {
   const [showLabelsModal, setShowLabelsModal] = useState(false);
   const [showLabelComment, setShowLabelComment] = useState(false);
 
+
+  //	En mode édition ?
+  //---------------------------------------------------------------------------
+  const EDIT_MODE = !!tache.$edit;
+  const editBtnStyle = 'btn ml-2 px-2 py-0.5 text-xs';
+
+
   //	Le nom du client et du chantier
   //---------------------------------------------------------------------------
-  let name = isVoid(tache.client_name) === false ? tache.client_name : '';
+  let clientName = isVoid(tache.client_name) === false ? tache.client_name : '';
   if (isVoid(tache.chantier_name) === false) {
     if (tache.client_name !== tache.chantier_name) {
       let separator = '';
-      if (name !== '') separator += ' - ';
+      if (clientName !== '') separator += ' - ';
 
-      name = <>{tache.client_name}{separator}<span className="font-medium">{tache.chantier_name}</span></>;
+      clientName = <>{tache.client_name}{separator}<span className="font-medium">{tache.chantier_name}</span></>;
     }
   }
 
@@ -197,8 +216,14 @@ export default function Tache(props) {
       {/* pb-3 border-b-3 border-dotted border-gray-200 */}
       <div className="flex flex-row justify-between">
         <div>
-          <div className="text-sm text-gray-400 font-light">{name}</div>
-          <div className="text-sm text-gray-700 font-semibold">{tache.description}</div>
+          <div className="text-sm text-gray-400 font-light">{clientName}
+            {EDIT_MODE && <button className={editBtnStyle}>Séléctionner</button>}
+          </div>
+          <div className="text-sm text-gray-700 font-semibold">
+            {EDIT_MODE ? <input className="inputClass w-full py-0.5 px-2 text-sm font-semibold text-gray-700" placeholder="Description de la tâche" />
+              : tache.description 
+            }
+          </div>
           <div className="text-xs text-gray-500 mt-1 font-light">
             <div className={iconClass}>
               {/* Location <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg> */}
@@ -217,8 +242,14 @@ export default function Tache(props) {
         </div>
       </div>
 
-      <Comments comments={comments} commentsClass={commentsClass} />
-      <Comments comments={workerComments} commentsClass={workerCommentsClass} className={`px-1.5 rounded ${labelClassName}`} />
+
+      {EDIT_MODE ? <NewComments />
+        : <>
+          <Comments comments={comments} commentsClass={commentsClass} />
+          <Comments comments={workerComments} commentsClass={workerCommentsClass} className={`px-1.5 rounded ${labelClassName}`} />
+        </>
+      }
+      
 
       <div className={clientTelClass}>
         {fix !== '' &&
@@ -245,6 +276,7 @@ export default function Tache(props) {
         <div>
           <div className={iconClass}>{activityIcon}</div>
           Activité {tache.activite_code} - {tache.activite_name}
+          {EDIT_MODE && <button className={editBtnStyle}>Séléctionner</button>}
         </div>
 
         <div className="relative">
@@ -255,12 +287,11 @@ export default function Tache(props) {
             tache.label.text = label.text;
             tache.label.color = label.color;
             setShowLabelsModal(false);
-            setShowLabelComment(true);
+            !EDIT_MODE && setShowLabelComment(true);
           }} onClose={() => setShowLabelsModal(false)} />}
 
           {showLabelComment && <LabelComment currentComment={tache.worker_comment} onSave={(comment) => {
             tache.worker_comment = comment;
-            console.log(tache.worker_comment);
             setShowLabelComment(false);
           }} onPrevious={() => {
             setShowLabelComment(false);
